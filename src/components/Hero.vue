@@ -21,7 +21,7 @@ export default {
           target:
             "https://github.com/Caeilanlightwood77/athena_personalized_ai",
         },
-        { title: "Simple Calculator", target: "#project2" },
+        { title: "Simple Calculator", target: "https://github.com/Caeilanlightwood77/simple_calculator" },
         {
           title: "Text-Based Game",
           target: "https://github.com/Caeilanlightwood77/text-based-game",
