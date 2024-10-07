@@ -22,7 +22,10 @@ export default {
             "https://github.com/Caeilanlightwood77/athena_personalized_ai",
         },
         { title: "Simple Calculator", target: "#project2" },
-        { title: "Text-Based Game", target: "#project3" },
+        {
+          title: "Text-Based Game",
+          target: "https://github.com/Caeilanlightwood77/text-based-game",
+        },
       ],
     };
   },
@@ -32,9 +35,9 @@ export default {
     },
     scrollTo(target) {
       if (this.projectItems.some((item) => item.target === target)) {
-        window.open(target, "_blank"); 
+        window.open(target, "_blank");
       } else {
-        this.$scrollTo(target, 1000); 
+        this.$scrollTo(target, 1000);
       }
       this.showMenu = false;
     },
