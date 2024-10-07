@@ -1,37 +1,3 @@
-<script>
-export default {
-  name: "HeroSection",
-  data() {
-    return {
-      showMenu: false,
-      isVisible: false,
-    };
-  },
-  methods: {
-    toggleMenu() {
-      this.showMenu = !this.showMenu;
-    },
-    scrollTo(target) {
-      this.$scrollTo(target, 1000);
-      this.showMenu = false;
-    },
-    scrollToTop() {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    },
-    handleScroll() {
-      this.isVisible = window.scrollY > 200; // Show button after scrolling 200px
-    },
-  },
-  mounted() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  beforeUnmount() {
-    // Updated from beforeDestroy to beforeUnmount
-    window.removeEventListener("scroll", this.handleScroll);
-  },
-};
-</script>
-
 <template>
   <section class="hero-section">
     <div class="left-content">
@@ -59,28 +25,39 @@ export default {
         <li>
           <a href="#services" @click.prevent="scrollTo('#services')">Service</a>
         </li>
+
+        <!-- Projects Dropdown -->
         <li class="dropdown">
-          <a href="#projects" @click.prevent="scrollTo('#projects')"
-            >Projects</a
+          <v-menu
+            :offset-y="location === 'bottom'"
+            :offset-x="location === 'end'"
+            :top="location === 'top'"
+            :left="isSmallScreen ? false : location === 'start'"
+            :right="isSmallScreen || location === 'end'"
           >
-          <ul class="dropdown-menu">
-            <li>
-              <a href="#project1" @click.prevent="scrollTo('#project1')"
-                >Athena (Personalized A.I)</a
+            <template v-slot:activator="{ props }">
+              <v-btn
+                color="primary"
+                dark
+                v-bind="props"
+                @click.prevent="scrollTo('#projects')"
               >
-            </li>
-            <li>
-              <a href="#project2" @click.prevent="scrollTo('#project2')"
-                >Simple Calculator</a
+                Projects
+              </v-btn>
+            </template>
+
+            <v-list>
+              <v-list-item
+                v-for="(item, index) in projectItems"
+                :key="index"
+                @click.prevent="scrollTo(item.target)"
               >
-            </li>
-            <li>
-              <a href="#project3" @click.prevent="scrollTo('#project3')"
-                >Text-Based Game</a
-              >
-            </li>
-          </ul>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
         </li>
+
         <li>
           <a href="#contact" @click.prevent="scrollTo('#contact')">Contact</a>
         </li>
@@ -97,6 +74,54 @@ export default {
     </button>
   </section>
 </template>
+
+<script>
+import { ref } from "vue";
+import { useDisplay } from "vuetify";
+
+export default {
+  name: "HeroSection",
+  setup() {
+    const { smAndDown } = useDisplay();
+    const isSmallScreen = ref(smAndDown);
+    return { isSmallScreen };
+  },
+  data() {
+    return {
+      showMenu: false,
+      isVisible: false,
+      location: "end",
+      locations: ["top", "bottom", "start", "end"],
+      projectItems: [
+        { title: "Athena (Personalized A.I)", target: "#project1" },
+        { title: "Simple Calculator", target: "#project2" },
+        { title: "Text-Based Game", target: "#project3" },
+      ],
+    };
+  },
+  methods: {
+    toggleMenu() {
+      this.showMenu = !this.showMenu;
+    },
+    scrollTo(target) {
+      this.$scrollTo(target, 1000);
+      this.showMenu = false;
+    },
+    scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+    handleScroll() {
+      this.isVisible = window.scrollY > 200;
+    },
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
+};
+</script>
 
 <style scoped>
 .hero-section {
@@ -223,15 +248,15 @@ export default {
 
 .scroll-to-top {
   position: fixed;
-  bottom: 30px; /* Distance from the bottom */
-  right: 30px; /* Distance from the right */
-  background-color: #343a40; /* Button background color */
-  color: white; /* Button text color */
+  bottom: 30px;
+  right: 30px;
+  background-color: #343a40;
+  color: white;
   border: none;
   border-radius: 50%;
-  width: 50px; /* Button size */
-  height: 50px; /* Button size */
-  font-size: 24px; /* Icon size */
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   display: flex;
@@ -241,7 +266,11 @@ export default {
 }
 
 .scroll-to-top:hover {
-  background-color: #555; /* Change color on hover */
+  background-color: #555;
+}
+
+.location-select {
+  margin-bottom: 10px;
 }
 
 @media (max-width: 768px) {
