@@ -1,3 +1,59 @@
+<script>
+import { ref } from "vue";
+import { useDisplay } from "vuetify";
+
+export default {
+  name: "HeroSection",
+  setup() {
+    const { smAndDown } = useDisplay();
+    const isSmallScreen = ref(smAndDown);
+    return { isSmallScreen };
+  },
+  data() {
+    return {
+      showMenu: false,
+      isVisible: false,
+      location: "end",
+      locations: ["top", "bottom", "start", "end"],
+      projectItems: [
+        {
+          title: "Athena (Personalized A.I)",
+          target:
+            "https://github.com/Caeilanlightwood77/athena_personalized_ai",
+        },
+        { title: "Simple Calculator", target: "#project2" },
+        { title: "Text-Based Game", target: "#project3" },
+      ],
+    };
+  },
+  methods: {
+    toggleMenu() {
+      this.showMenu = !this.showMenu;
+    },
+    scrollTo(target) {
+      if (this.projectItems.some((item) => item.target === target)) {
+        window.open(target, "_blank"); 
+      } else {
+        this.$scrollTo(target, 1000); 
+      }
+      this.showMenu = false;
+    },
+    scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+    handleScroll() {
+      this.isVisible = window.scrollY > 200;
+    },
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
+};
+</script>
+
 <template>
   <section class="hero-section">
     <div class="left-content">
@@ -74,54 +130,6 @@
     </button>
   </section>
 </template>
-
-<script>
-import { ref } from "vue";
-import { useDisplay } from "vuetify";
-
-export default {
-  name: "HeroSection",
-  setup() {
-    const { smAndDown } = useDisplay();
-    const isSmallScreen = ref(smAndDown);
-    return { isSmallScreen };
-  },
-  data() {
-    return {
-      showMenu: false,
-      isVisible: false,
-      location: "end",
-      locations: ["top", "bottom", "start", "end"],
-      projectItems: [
-        { title: "Athena (Personalized A.I)", target: "#project1" },
-        { title: "Simple Calculator", target: "#project2" },
-        { title: "Text-Based Game", target: "#project3" },
-      ],
-    };
-  },
-  methods: {
-    toggleMenu() {
-      this.showMenu = !this.showMenu;
-    },
-    scrollTo(target) {
-      this.$scrollTo(target, 1000);
-      this.showMenu = false;
-    },
-    scrollToTop() {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    },
-    handleScroll() {
-      this.isVisible = window.scrollY > 200;
-    },
-  },
-  mounted() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  beforeUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-  },
-};
-</script>
 
 <style scoped>
 .hero-section {
