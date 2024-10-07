@@ -91,10 +91,10 @@ h2 {
   }
 
   h2 {
-    font-size: 5vw;
+    font-size: 6vw;
   }
   .typed {
-    font-size: 4vw;
+    font-size: 5vw;
   }
 }
 
@@ -105,10 +105,10 @@ h2 {
   }
 
   h2 {
-    font-size: 4vw;
+    font-size: 6vw;
   }
   .typed {
-    font-size: 3vw;
+    font-size: 5vw;
   }
 }
 </style>

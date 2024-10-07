@@ -179,13 +179,13 @@ export default {
   transition: width 1s;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1400px) {
   .about-container {
     padding-top: 110px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .about-container {
     flex-direction: column;
     padding-top: 110px;
@@ -196,7 +196,19 @@ export default {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 992px) {
+  .about-container {
+    padding-top: 110px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    padding-top: 110px;
+  }
+}
+
+@media (max-width: 575px) {
   .about-container {
     padding-top: 110px;
   }
