@@ -23,7 +23,7 @@ export default {
         },
         {
           title: "Simple Calculator",
-          target: "https://github.com/Caeilanlightwood77/simple_calculator",
+          target: "https://vercel.live/link/catculator-ten.vercel.app?via=project-dashboard-alias-list&p=1",
         },
         {
           title: "Text-Based Game",
