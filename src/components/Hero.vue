@@ -29,6 +29,14 @@ export default {
           title: "Text-Based Game",
           target: "https://github.com/Caeilanlightwood77/text-based-game",
         },
+        {
+          title: "Simple Send SMS",
+          target: "https://github.com/Caeilanlightwood77/simple_send_sms",
+        },
+        {
+          title: "Todo-List w Laravel/Vuejs",
+          target: "https://github.com/Caeilanlightwood77/todoList_laravel_vuejs",
+        },
       ],
     };
   },
