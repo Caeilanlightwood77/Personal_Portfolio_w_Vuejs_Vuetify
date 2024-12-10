@@ -24,7 +24,7 @@ export default {
         <!-- Projects -->
         <v-col cols="12" md="3" sm="6">
           <v-card class="stats-item py-5">
-            <div class="stat-number display-1 font-weight-bold">3</div>
+            <div class="stat-number display-1 font-weight-bold">5</div>
             <p>Projects</p>
           </v-card>
         </v-col>
